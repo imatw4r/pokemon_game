@@ -37,7 +37,6 @@ class HumanPlayer(Player):
         for pokemon in self.game_pokedex:
             if pokemon.current_hp > 0:
                 alive_pokemons.append(pokemon)
-        self.show_pokedex()
         if len(alive_pokemons) != 0:
             new_pokemon = int(input("Choose pokemon: "))
             return alive_pokemons[new_pokemon]

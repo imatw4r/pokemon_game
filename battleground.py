@@ -14,6 +14,7 @@ def battle_arena(pretendent: Pokemon, champion: Pokemon) -> None:
 
 def starting_poke_player(player: Player) -> Pokemon:
     print("Choose one starting pokemon: ")
+    player.show_pokedex()
     old_player_pokemon = player.choose_pokemon()
     return old_player_pokemon
 
