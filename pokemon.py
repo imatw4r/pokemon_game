@@ -159,3 +159,6 @@ class Pokemon:
         for ability in poke_abilities:
             new_pokemon.learn(ability)
         return new_pokemon
+
+    def get_speed(self) -> float:
+        return self.speed

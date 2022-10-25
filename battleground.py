@@ -3,13 +3,15 @@ from player import Player
 
 
 def battle_arena(pretendent: Pokemon, champion: Pokemon) -> None:
-    if pretendent.is_alive() and champion.is_alive():
-        if pretendent.speed < champion.speed:
-            pretendent, champion = champion, pretendent
-        while pretendent.is_alive() and champion.is_alive():
-            pretendent.attack(champion)
-            if champion.current_hp > 0:
-                champion.attack(pretendent)
+    if not pretendent.is_alive() and not champion.is_alive():
+        return
+
+    faster_pokemon, slower_pokemon = sorted([pretendent, champion], key=Pokemon.get_speed, reverse=True)
+
+    while faster_pokemon.is_alive() and slower_pokemon.is_alive():
+        faster_pokemon.attack(slower_pokemon)
+        if slower_pokemon.is_alive():
+            slower_pokemon.attack(faster_pokemon)
 
 
 def starting_poke_player(player: Player) -> Pokemon:
