@@ -3,7 +3,7 @@ from player import Player
 
 
 def battle_arena(pretendent: Pokemon, champion: Pokemon) -> None:
-    if not pretendent.is_alive() and not champion.is_alive():
+    if not pretendent or not champion:
         return
 
     faster_pokemon, slower_pokemon = sorted([pretendent, champion], key=Pokemon.get_speed, reverse=True)
