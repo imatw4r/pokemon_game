@@ -11,8 +11,8 @@ class Player(ABC):
         self.name = name
         self.game_pokedex: List[Pokemon] = []
 
-    def show_pokedex(self, poke_list: List[Pokemon]) -> None:
-        for index, pokemon in enumerate(poke_list):
+    def show_pokedex(self) -> None:
+        for index, pokemon in enumerate(self.game_pokedex):
             print(f"{index} = {pokemon.name}")
 
     @abstractmethod
@@ -37,7 +37,7 @@ class HumanPlayer(Player):
         for pokemon in self.game_pokedex:
             if pokemon.current_hp > 0:
                 alive_pokemons.append(pokemon)
-        self.show_pokedex(alive_pokemons)
+        self.show_pokedex()
         if len(alive_pokemons) != 0:
             new_pokemon = int(input("Choose pokemon: "))
             return alive_pokemons[new_pokemon]
