@@ -16,11 +16,11 @@ class Player(ABC):
             print(f"{index} = {pokemon.name}")
 
     @abstractmethod
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Pokemon:
+    def choose_pokemon(self) -> Optional[Pokemon]:
         pass
 
-    def get_poke(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
-        new_pokemon = self.choose_pokemon(poke_list)
+    def get_poke(self) -> Optional[Pokemon]:
+        new_pokemon = self.choose_pokemon()
         return new_pokemon
 
     def remove_poke(self, pokemon: Pokemon, poke_list: List[Pokemon]) -> None:
@@ -32,9 +32,9 @@ class Player(ABC):
 
 
 class HumanPlayer(Player):
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
+    def choose_pokemon(self) -> Optional[Pokemon]:
         alive_pokemons = []
-        for pokemon in poke_list:
+        for pokemon in self.game_pokedex:
             if pokemon.current_hp > 0:
                 alive_pokemons.append(pokemon)
         self.show_pokedex(alive_pokemons)
@@ -49,9 +49,9 @@ class HumanPlayer(Player):
 
 
 class PcPlayer(Player):
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
+    def choose_pokemon(self) -> Optional[Pokemon]:
         alive_pokemons = []
-        for pokemon in poke_list:
+        for pokemon in self.game_pokedex:
             if pokemon.current_hp > 0:
                 alive_pokemons.append(pokemon)
         new_pokemon = random.choice(alive_pokemons)
@@ -71,10 +71,11 @@ class Trainer(Player):
             pc_pok = poke_tab[i]
             self.game_pokedex.append(Pokemon.create(pc_pok))
 
-    def choose_pokemon(self, poke_list: List[Pokemon]) -> Optional[Pokemon]:
-        for pokemon in poke_list:
+    def choose_pokemon(self) -> Optional[Pokemon]:
+        for pokemon in self.game_pokedex:
             if pokemon.current_hp > 0:
                 return pokemon
+        return None
 
     def fill_pokedex(self) -> None:
         pass
