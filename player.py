@@ -11,24 +11,20 @@ class Player(ABC):
         self.name = name
         self.game_pokedex: List[Pokemon] = []
 
-    def show_pokedex(self) -> None:
-        for index, pokemon in enumerate(self.game_pokedex):
-            print(f"{index} = {pokemon.name}")
-
     @abstractmethod
     def choose_pokemon(self) -> Optional[Pokemon]:
         pass
 
-    def get_poke(self) -> Optional[Pokemon]:
-        new_pokemon = self.choose_pokemon()
-        return new_pokemon
-
-    def remove_poke(self, pokemon: Pokemon, poke_list: List[Pokemon]) -> None:
-        poke_list.remove(pokemon)
-
     @abstractmethod
     def fill_pokedex(self) -> None:
         pass
+
+    def show_pokedex(self) -> None:
+        for index, pokemon in enumerate(self.game_pokedex):
+            print(f"{index} = {pokemon.name}")
+
+    def remove_poke(self, pokemon: Pokemon, poke_list: List[Pokemon]) -> None:
+        poke_list.remove(pokemon)
 
 
 class HumanPlayer(Player):
